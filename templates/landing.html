@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formidable Quiz Landing Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing_style.css') }}">
+</head>
+<body>
+    <div class="landing-container">
+        <h1>Welcome to the Formidable Quiz!</h1>
+        <p>Are you ready to put your knowledge to the test? Whether you're a coding prodigy, a history enthusiast, an economics whiz, or a biology buff, the Formidable Quiz has a challenge for you.</p>
+        <p>Our diverse range of questions spans multiple disciplines, each designed to push your intellectual limits. But don't worry. Although challenging, every segment is conquerable with the right mix of knowledge and critical thinking.</p>
+        <p>Think you've got what it takes to climb the ranks? Log in now and see how you stack up against our current leaders on our leaderboard.</p>
+        <p>Your journey to intellectual triumph begins here. Are you formidable enough to claim the top spot?</p>
+
+        <div class="button-container">
+            <button onclick="window.location.href='/login'">Login</button>
+            <button onclick="window.location.href='/register'">Register</button>
+        </div>
+
+        <div class="image-slider">
+            <img id="quizImage" src="{{ url_for('static', filename='programming.jpg') }}" alt="Programming">
+            <div class="image-caption" id="imageCaption">Programming</div>
+        </div>
+    </div>
+
+    <script>
+        const images = [
+            { src: "{{ url_for('static', filename='programming.jpg') }}", caption: "Programming" },
+            { src: "{{ url_for('static', filename='english.jpg') }}", caption: "English" },
+            { src: "{{ url_for('static', filename='history.jpg') }}", caption: "History" },
+            { src: "{{ url_for('static', filename='economics.jpg') }}", caption: "Economics" },
+            { src: "{{ url_for('static', filename='biology.jpg') }}", caption: "Biology" }
+        ];
+
+        let currentIndex = 0;
+
+        function changeImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            document.getElementById('quizImage').src = images[currentIndex].src;
+            document.getElementById('imageCaption').textContent = images[currentIndex].caption;
+        }
+
+        setInterval(changeImage, 3000); // Change image every 3 seconds
+    </script>
+</body>
+</html>
