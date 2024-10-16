@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Form</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main_style.css') }}">
+    <script src="{{ url_for('static', filename='mainform_script.js') }}" defer></script>
 </head>
 <body>
 
@@ -13,19 +16,19 @@
         <h1>Welcome, {{ user_full_name }}</h1>
     </div>
     <div class="profile">
-        <img src="{{ url_for('static', filename='uploads/' + user_profile_picture) }}" alt="Profile Picture">
+        <img src="{{ url_for('static', filename='' + user_profile_picture) }}" alt="Profile Picture">
     </div>
 </div>
 
 <div class="quiz-section">
     <h2 class="quiz-title">Ready for a quiz? Click below.</h2>
     <button id="quizToggle" class="quiz-toggle">+</button>
-    <ul class="quiz-topics" id="quizTopics" style="display: none;">
-        <li><a href="/quiz/programming">Programming</a></li>
-        <li><a href="/quiz/english">English</a></li>
-        <li><a href="/quiz/history">History</a></li>
-        <li><a href="/quiz/economics">Economics</a></li>
-        <li><a href="/quiz/biology">Biology</a></li>
+    <ul class="quiz-courses" id="quizCourses" style="display: none;">
+        <li><a href="/mainform/programming">Programming</a></li>
+        <li><a href="/mainform/english">English</a></li>
+        <li><a href="/mainform/history">History</a></li>
+        <li><a href="/mainform/economics">Economics</a></li>
+        <li><a href="/mainform/biology">Biology</a></li>
     </ul>
 </div>
 
@@ -34,7 +37,7 @@
 </div>
 
 <div class="member-since">
-    <strong>Member since: </strong> <span id="memberSince"></span>
+    <strong>Member since: </strong> <em>{{ created_on }}</em>
 </div>
 
 <div class="scores-grid">
@@ -91,31 +94,5 @@
 <div class="logout">
     <button>Logout</button>
 </div>
-
-<script>
-    document.getElementById("quizToggle").addEventListener("click", function() {
-        const topics = document.getElementById("quizTopics");
-        topics.style.display = topics.style.display === "block" ? "none" : "block";
-    });
-
-    function updateDateTime() {
-        const dateTime = new Date().toLocaleString();
-        document.getElementById("dateTime").textContent = dateTime;
-    }
-    setInterval(updateDateTime, 1000);
-
-
-    const accountCreationDate = new Date("2024-01-01T12:00:00");
-    function updateMemberSince() {
-        const now = new Date();
-        const diff = now - accountCreationDate;
-        const seconds = Math.floor(diff / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        document.getElementById("memberSince").textContent = `${days} days, ${hours % 24} hours, ${minutes % 60} minutes, and ${seconds % 60} seconds ago`;
-    }
-    setInterval(updateMemberSince, 1000);
-</script>
 </body>
 </html>

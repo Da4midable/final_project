@@ -1,31 +1,33 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #34495e;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column;
 }
 
 .landing-container {
-    background-color: white;
+    background-color: #34495e;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     text-align: center;
     max-width: 600px;
     margin: 0 auto;
+    overflow-y: auto;
 }
 
 h1 {
-    color: #2c3e50;
+    color: #0984e3;
     margin-bottom: 20px;
 }
 
 p {
-    color: #7f8c8d;
+    color: #00b894;
     margin-bottom: 15px;
 }
 
@@ -55,13 +57,16 @@ button:hover {
 
 .image-slider img {
     width: 100%;
-    height: auto;
+    height: 300px; /* Fixed height for images */
+    object-fit: cover; /* Ensures images fit without distortion */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .image-caption {
-    font-size: 18px;
-    color: #2c3e50;
+    font-size: 22px;
+    color: #CAD3C8;
     margin-top: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-style: italic;
 }

@@ -21,6 +21,7 @@ body {
 }
 
 .quiz-section {
+    text-align: center;
     margin: 20px 0;
 }
 
@@ -28,15 +29,18 @@ body {
     background-color: #4CAF50;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 15px 30px;
+    font-size: 35px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
-.quiz-topics {
+.quiz-courses {
     display: none;
     margin-top: 10px;
     list-style-type: none;
     padding-left: 0;
+    font-size: 30px;
 }
 
 .quiz-topics li {

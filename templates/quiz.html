@@ -3,28 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programming Quiz</title>
+    <title>Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='quiz_style.css') }}">
 </head>
 <body>
+    <div class="quiz-container">
+        <div id="timer-section">
+            <p>Time Left: <span id="timer">03:00</span></p>
+        </div>
 
-<div class="quiz-container">
-    <div id="timer-section">
-        <p>Time Left: <span id="timer">03:00</span></p>
-    </div>
-    
-    <div id="question-section">
-        <h3 id="quiz-question"></h3>
-        <div id="options"></div>
-    </div>
-    
-    <button id="nextQuestion">Next Question</button>
-    <div id="score-section" style="display: none;">
-        <h2>Your Score: <span id="finalScore"></span></h2>
-    </div>
-</div>
+        <div id="question-section">
+            <h3 id="quiz-question">{{ question }}</h3>
+            <form method="POST" id="quizForm">
+                <div id="options">
+                    {% for option in options %}
+                        <label class="quiz-option">
+                            <input type="radio" name="answer" value="{{ option }}" required>
+                            {{ option }}
+                        </label><br>
+                    {% endfor %}
+                </div>
+                <button type="submit" id="nextQuestion">{{ 'End Quiz' if current_index == total_questions - 1 else 'Next Question' }}</button>
+            </form>
+        </div>
 
-<script src="{{ url_for('static', filename='quiz_script.js') }}"></script>
+        <div id="score-section" style="display: none;">
+            <h2>Your Score: <span id="finalScore"></span></h2>
+        </div>
+    </div>
 
+    <script>
+        let timer = 180;
+        const timerElement = document.getElementById('timer');
+
+        const countdown = setInterval(() => {
+            const minutes = Math.floor(timer / 60);
+            const seconds = timer % 60;
+            timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            timer--;
+
+            if (timer < 0) {
+                clearInterval(countdown);
+                document.getElementById('nextQuestion').click();
+            }
+        }, 1000);
+    </script>
 </body>
 </html>

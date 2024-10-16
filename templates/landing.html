@@ -20,18 +20,18 @@
         </div>
 
         <div class="image-slider">
-            <img id="quizImage" src="{{ url_for('static', filename='programming.jpg') }}" alt="Programming">
+            <img id="quizImage" src="{{ url_for('static', filename='programming.jpeg') }}" alt="Programming">
             <div class="image-caption" id="imageCaption">Programming</div>
         </div>
     </div>
 
     <script>
         const images = [
-            { src: "{{ url_for('static', filename='programming.jpg') }}", caption: "Programming" },
-            { src: "{{ url_for('static', filename='english.jpg') }}", caption: "English" },
-            { src: "{{ url_for('static', filename='history.jpg') }}", caption: "History" },
-            { src: "{{ url_for('static', filename='economics.jpg') }}", caption: "Economics" },
-            { src: "{{ url_for('static', filename='biology.jpg') }}", caption: "Biology" }
+            { src: "{{ url_for('static', filename='programming.jpeg') }}", caption: "Programming" },
+            { src: "{{ url_for('static', filename='manuscript.jpeg') }}", caption: "English" },
+            { src: "{{ url_for('static', filename='artifacts.jpeg') }}", caption: "History" },
+            { src: "{{ url_for('static', filename='trading.jpeg') }}", caption: "Economics" },
+            { src: "{{ url_for('static', filename='DNA.jpeg') }}", caption: "Biology" }
         ];
 
         let currentIndex = 0;
