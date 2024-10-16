@@ -200,6 +200,12 @@ def quiz_result(course):
     clear_quiz_session()
     return render_template('quiz_result.html', score=score, total_questions=total_questions, course=course)
 
+@app.route('/logout', methods=['GET'])
+def logout():
+    """logs out user"""
+    session.clear()
+    return redirect(url_for('login'))
+
 
 def clear_quiz_session():
     """Clear the quiz session data"""
