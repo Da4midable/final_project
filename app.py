@@ -3,14 +3,11 @@ from werkzeug.utils import secure_filename
 import mysql.connector
 import os
 import bcrypt
-import re
-import json
 import datetime
 from uuid import uuid4
 from dotenv import load_dotenv
 from openai import OpenAI
-import time
-import ast
+
 
 client = OpenAI(api_key=os.getenv('OAI_API_KEY'))
 
@@ -98,7 +95,7 @@ def register():
 
         hashed_password = hash_password(password).decode('utf-8')
 
-        image_path = os.path.join('uploads', secure_filename(image.filename))
+        image_path = os.path.join('static/uploads', secure_filename(image.filename))
         image.save(image_path)
         
         registration_date = get_today_date_string()

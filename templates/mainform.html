@@ -16,7 +16,7 @@
         <h1>Welcome, {{ user_full_name }}</h1>
     </div>
     <div class="profile">
-        <img src="{{ url_for('static', filename='' + user_profile_picture) }}" alt="Profile Picture">
+        <img src="{{ user_profile_picture }}" alt="Profile Picture">
     </div>
 </div>
 
