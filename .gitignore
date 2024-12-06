@@ -22,6 +22,7 @@ new_model.py
 newest.py
 png-transparent-spider-man-heroes-download-with-transparent-background-free-thumbnail.png:Zone.Identifier
 programming.jpeg:Zone.Identifier
+qua.py
 queriable.py
 question_bank3.py
 quiz1.py
@@ -30,3 +31,17 @@ requirements.txt
 spidey.png
 streamlit_test.py
 test_tk.py
+0-transfer_file
+1-install_load_balancer
+1-install_nginx_web_server
+2-setup_a_domain_name
+3-redirection
+4-not_found_page_404
+7-puppet_install_nginx_web_server
+cert.sh
+twi.py
+what.py
+wsgi.py
+gen_quiz.py
+dyn_quiz.py
+second_app.py

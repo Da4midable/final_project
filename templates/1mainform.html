@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_style.css') }}">
+    <script src="{{ url_for('static', filename='mainform_script.js') }}" defer></script>
+</head>
+<body>
+
+<div class="header">
+    <div class="welcome">
+        <h1>Welcome, {{ user_full_name }}</h1>
+    </div>
+    <div class="profile">
+        <img src="{{ user_profile_picture }}" alt="Profile Picture">
+    </div>
+</div>
+
+<div class="quiz-section">
+    <h2 class="quiz-title">Ready for a quiz? Click below.</h2>
+    <button id="quizToggle" class="quiz-toggle">+</button>
+    <ul class="quiz-courses" id="quizCourses" style="display: none;">
+        <li><a href="/mainform/programming">Programming</a></li>
+        <li><a href="/mainform/english">English</a></li>
+        <li><a href="/mainform/history">History</a></li>
+        <li><a href="/mainform/economics">Economics</a></li>
+        <li><a href="/mainform/biology">Biology</a></li>
+    </ul>
+</div>
+
+<div class="date-time-panel">
+    <strong>Date & Time: </strong> <span id="dateTime"></span>
+</div>
+
+<div class="member-since">
+    <strong>Member since: </strong> <em>{{ created_on }}</em>
+</div>
+
+<div class="scores-grid">
+    <div class="score-item">
+        <h3>Recent Score</h3>
+        <p>{{ recent_score }}</p>
+    </div>
+    <div class="score-item">
+        <h3>All-time Score</h3>
+        <p>{{ all_time_score }}</p>
+    </div>
+</div>
+
+<div class="leaderboard">
+    <h2>Leaderboard</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>User</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in ['programming', 'english', 'history', 'economics', 'biology'] %}
+            <tr>
+                <td>{{ course.capitalize() }}</td>
+                <td>{{ top_users['top_user_' + course] }}</td>
+                <td>{{ top_scores['top_score_' + course] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="logout">
+    <button onclick="window.location.href='{{ url_for('logout') }}'">Logout</button>
+</div>
+</body>
+</html>

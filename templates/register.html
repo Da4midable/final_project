@@ -4,39 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Register</h1>
-        <form action="/register" method="POST" enctype="multipart/form-data">
-            <label for="fullname">Full name:</label>
-            <input type="text" id="full name" name="full name" required><br>
+        <h1>Create Account</h1>
+        
+        <!-- Flash Messages -->
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for category, message in messages %}
+                            <li class="flash-message {{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
 
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
+        <!-- Registration form -->
+        <form action="{{ url_for('register') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="fullname">Full name</label>
+                <input type="text" id="full name" name="full name" required 
+                       placeholder="Enter your full name">
+            </div>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required 
+                       placeholder="Choose a username">
+            </div>
 
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required><br>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required 
+                       placeholder="Enter your password">
+            </div>
 
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone" required><br>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required 
+                       placeholder="Confirm your password">
+            </div>
 
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select><br>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" required 
+                       placeholder="Enter your phone number">
+            </div>
 
-            <label for="image">Upload Image:</label>
-            <input type="file" id="image" name="image" required><br>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
 
-            <button type="submit">Register</button>
+            <div class="form-group">
+                <label for="image">Profile Picture</label>
+                <input type="file" id="image" name="image" 
+                       accept=".png,.jpg,.jpeg,.gif,.bmp,.webp" required>
+            </div>
+
+            <button type="submit">Create Account</button>
         </form>
-        <p><a href="{{ url_for('login') }}">Already have an account? Login</a></p>
+
+        <p class="login-link">
+            <a href="{{ url_for('login') }}">Already have an account? Log in</a>
+        </p>
     </div>
 </body>
 </html>

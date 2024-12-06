@@ -1,98 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Form</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main_style.css') }}">
+    <title>Quiz Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+
     <script src="{{ url_for('static', filename='mainform_script.js') }}" defer></script>
 </head>
 <body>
+    <header class="header">
+        <div class="header-content">
+            <div class="welcome">
+                <h1>Welcome, {{ user_full_name }}</h1>
+            </div>
+            <div class="profile">
+                <img src="{{ user_profile_picture }}" alt="Profile Picture">
+            </div>
+        </div>
+    </header>
 
-<div class="header">
-    <div class="welcome">
-        <h1>Welcome, {{ user_full_name }}</h1>
-    </div>
-    <div class="profile">
-        <img src="{{ user_profile_picture }}" alt="Profile Picture">
-    </div>
-</div>
+    <main class="main-content">
+        <section class="quiz-section animate-on-scroll">
+            <h2 class="quiz-title">Choose Your Quiz Topic</h2>
+            <button id="quizToggle" class="quiz-toggle">+</button>
+            <ul class="quiz-courses hidden" id="quizCourses">
+                <li><a href="/mainform/programming">Programming</a></li>
+                <li><a href="/mainform/english">English</a></li>
+                <li><a href="/mainform/history">History</a></li>
+                <li><a href="/mainform/economics">Economics</a></li>
+                <li><a href="/mainform/biology">Biology</a></li>
+            </ul>
+        </section>
 
-<div class="quiz-section">
-    <h2 class="quiz-title">Ready for a quiz? Click below.</h2>
-    <button id="quizToggle" class="quiz-toggle">+</button>
-    <ul class="quiz-courses" id="quizCourses" style="display: none;">
-        <li><a href="/mainform/programming">Programming</a></li>
-        <li><a href="/mainform/english">English</a></li>
-        <li><a href="/mainform/history">History</a></li>
-        <li><a href="/mainform/economics">Economics</a></li>
-        <li><a href="/mainform/biology">Biology</a></li>
-    </ul>
-</div>
+        <div class="stats-grid">
+            <div class="stat-card animate-on-scroll">
+                <h3>Current Time</h3>
+                <p id="dateTime"></p>
+            </div>
+            <div class="stat-card animate-on-scroll">
+                <h3>Member Since</h3>
+                <p>{{ created_on }}</p>
+            </div>
+            <div class="stat-card animate-on-scroll">
+                <h3>Recent Score</h3>
+                <p>{{ recent_score }}</p>
+            </div>
+            <div class="stat-card animate-on-scroll">
+                <h3>All-time Score</h3>
+                <p>{{ all_time_score }}</p>
+            </div>
+        </div>
 
-<div class="date-time-panel">
-    <strong>Date & Time: </strong> <span id="dateTime"></span>
-</div>
+        <section class="leaderboard animate-on-scroll">
+            <h2>Leaderboard</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Top Player</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in ['programming', 'english', 'history', 'economics', 'biology'] %}
+                    <tr>
+                        <td>{{ course.capitalize() }}</td>
+                        <td>{{ top_users['top_user_' + course] }}</td>
+                        <td>{{ top_scores['top_score_' + course] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
 
-<div class="member-since">
-    <strong>Member since: </strong> <em>{{ created_on }}</em>
-</div>
-
-<div class="scores-grid">
-    <div class="score-item">
-        <h3>Recent Score</h3>
-        <p>{{ recent_score }}</p>
-    </div>
-    <div class="score-item">
-        <h3>All-time Score</h3>
-        <p>{{ all_time_score }}</p>
-    </div>
-</div>
-
-<div class="leaderboard">
-    <h2>Leaderboard</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>User</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Programming</td>
-                <td>{{ top_user_programming }}</td>
-                <td>{{ top_score_programming }}</td>
-            </tr>
-            <tr>
-                <td>English</td>
-                <td>{{ top_user_english }}</td>
-                <td>{{ top_score_english }}</td>
-            </tr>
-            <tr>
-                <td>History</td>
-                <td>{{ top_user_history }}</td>
-                <td>{{ top_score_history }}</td>
-            </tr>
-            <tr>
-                <td>Economics</td>
-                <td>{{ top_user_economics }}</td>
-                <td>{{ top_score_economics }}</td>
-            </tr>
-            <tr>
-                <td>Biology</td>
-                <td>{{ top_user_biology }}</td>
-                <td>{{ top_score_biology }}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="logout">
-    <button onclick="window.location.href='{{ url_for('logout') }}'">Logout</button>
-</div>
+        <div class="logout">
+            <button class="logout-button" onclick="window.location.href='{{ url_for('logout') }}'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                Logout
+            </button>
+        </div>
+    </main>
 </body>
 </html>

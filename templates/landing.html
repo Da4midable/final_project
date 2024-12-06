@@ -3,26 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formidable Quiz Landing Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='landing_style.css') }}">
+    <title>Formidable Quiz | Test Your Knowledge</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
 </head>
-<body>
-    <div class="landing-container">
-        <h1>Welcome to the Formidable Quiz!</h1>
-        <p>Are you ready to put your knowledge to the test? Whether you're a coding prodigy, a history enthusiast, an economics whiz, or a biology buff, the Formidable Quiz has a challenge for you.</p>
-        <p>Our diverse range of questions spans multiple disciplines, each designed to push your intellectual limits. But don't worry. Although challenging, every segment is conquerable with the right mix of knowledge and critical thinking.</p>
-        <p>Think you've got what it takes to climb the ranks? Log in now and see how you stack up against our current leaders on our leaderboard.</p>
-        <p>Your journey to intellectual triumph begins here. Are you formidable enough to claim the top spot?</p>
+<body class="bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+    <div class="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <main class="max-w-4xl w-full space-y-8 animate-fade-in">
+            <!-- Hero Section -->
+            <div class="text-center">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+                    Welcome to the Formidable Quiz
+                </h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Challenge yourself across multiple disciplines and prove your intellectual prowess
+                </p>
+            </div>
 
-        <div class="button-container">
-            <button onclick="window.location.href='/login'">Login</button>
-            <button onclick="window.location.href='/register'">Register</button>
-        </div>
+            <!-- Feature Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                <div class="feature-card">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Multiple Disciplines</h3>
+                    <p class="text-gray-600">From coding to history, economics to biology - test your knowledge across various fields.</p>
+                </div>
 
-        <div class="image-slider">
-            <img id="quizImage" src="{{ url_for('static', filename='programming.jpeg') }}" alt="Programming">
-            <div class="image-caption" id="imageCaption">Programming</div>
-        </div>
+                <div class="feature-card">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Challenge Yourself</h3>
+                    <p class="text-gray-600">Push your intellectual limits with our carefully crafted questions and problems.</p>
+                </div>
+            </div>
+
+            <!-- Image Slider -->
+            <div class="image-slider-container">
+                <div class="image-slider">
+                    <img id="quizImage" class="slider-image" src="{{ url_for('static', filename='programming.jpeg') }}" alt="Programming">
+                    <div class="image-caption" id="imageCaption">Programming</div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+                <a href="{{ url_for('login') }}" class="btn-primary">
+                    Sign In
+                </a>
+                <a href="{{ url_for('register') }}" class="btn-secondary">
+                    Create Account
+                </a>
+            </div>
+        </main>
     </div>
 
     <script>
@@ -37,12 +78,28 @@
         let currentIndex = 0;
 
         function changeImage() {
-            currentIndex = (currentIndex + 1) % images.length;
-            document.getElementById('quizImage').src = images[currentIndex].src;
-            document.getElementById('imageCaption').textContent = images[currentIndex].caption;
+            const nextIndex = (currentIndex + 1) % images.length;
+            const currentImage = document.getElementById('quizImage');
+            const caption = document.getElementById('imageCaption');
+
+            currentImage.classList.add('fade-out');
+            
+            setTimeout(() => {
+                currentImage.src = images[nextIndex].src;
+                caption.textContent = images[nextIndex].caption;
+        
+                currentImage.classList.remove('fade-out');
+                currentImage.classList.add('fade-in');
+                
+                setTimeout(() => {
+                    currentImage.classList.remove('fade-in');
+                }, 500);
+                
+                currentIndex = nextIndex;
+            }, 500);
         }
 
-        setInterval(changeImage, 3000); // Change image every 3 seconds
+        setInterval(changeImage, 5000);
     </script>
 </body>
 </html>

@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ecf0f1;
+    margin: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome h1 {
+    color: #2980b9;
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.quiz-section {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.quiz-section button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 35px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.quiz-courses {
+    display: none;
+    margin-top: 10px;
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 30px;
+}
+
+.quiz-topics li {
+    margin: 5px 0;
+}
+
+.date-time-panel, .member-since {
+    margin: 15px 0;
+}
+
+.scores-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.score-item {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.leaderboard {
+    margin-top: 20px;
+}
+
+.leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard th, .leaderboard td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.leaderboard tr:hover {
+    background-color: #f1f1f1;
+}
+
+.leaderboard th {
+    background-color: #2980b9;
+    color: white;
+}
+
+.logout button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.quiz-categories {
+    margin-bottom: 20px;
+}
+
+.quiz-categories button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.quiz-categories button:hover {
+    background-color: #45a049;
+}
+
+#quiz-container {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+#timer {
+    font-weight: bold;
+    color: red;
+}
+
+#answer-section button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
